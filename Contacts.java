@@ -24,6 +24,7 @@ public class Contacts {
             System.out.print("Enter action (add, remove, edit, count, list, exit): ");
             choice = scanner.next();
 
+
             switch (choice) {
                 case "add":
                     command = new AddContactCommand(this);
@@ -44,7 +45,7 @@ public class Contacts {
                 case "list":
                     printContacts();
                     break;
-                case "exit:":
+                case "exit":
                     break contacts;
             }
         }

@@ -34,6 +34,10 @@ public abstract class Entry {
     //Correct number check
 
     private int isCorrectParentheses(String group) {
+        if (group.matches("\\(\\)+")) {
+            return Integer.MIN_VALUE;
+        }
+
         if (group.startsWith("(")) {
             if (group.endsWith(")")) {
                 return 1;
@@ -50,11 +54,10 @@ public abstract class Entry {
         String[] groups;
 
         if (phone.startsWith("+")) {
-            groups = phone.split("[-\\s]");
-        } else {
             groups = phone.substring(1).split("[-\\s]");
+        } else {
+            groups = phone.split("[-\\s]");
         }
-
         int count = 0;
 
         int[] passed = new int[groups.length];
@@ -67,14 +70,18 @@ public abstract class Entry {
             return false;
         }
 
+        if (groups[0].startsWith("+")) {
+            groups[0] = groups[0].substring(1);
+        }
 
         for (int i = 0; i < passed.length; i++) {
-            if (i > 1 && passed[i] != 0) {
-                return false;
-            }
-
-            //Group can be 09(09)09, which is wrong. One More check
-            if (groups[i].contains("(") && !groups[i].startsWith("(")) {
+            System.out.println(groups[i]);
+            if ((i > 1 && passed[i] != 0) ||
+                    (groups[i].contains("(")
+                            && !groups[i].startsWith("(")) ||
+                    groups[i].contains("+") ||
+                    (i > 0 && groups[i].length() == 1) ||
+                    isCorrectParentheses(groups[i]) < 0) {
                 return false;
             }
 
@@ -86,10 +93,10 @@ public abstract class Entry {
         String finalPhone = phone.replaceAll("[()]", "");
 
         Pattern pattern = Pattern.compile(
-                "((\\+?[\\s-]?)([a-zA-z0-9]+[\\s-]?)(([a-zA-z0-9]{2,}[\\s-])*))");
+                "(((\\+?[\\s-]?)([a-zA-z0-9]+[\\s-]?)(([a-zA-z0-9]{2,}[\\s-]))*))+");
         Matcher matcher = pattern.matcher(finalPhone);
 
-        if (matcher.find()) {
+        if (matcher.matches()) {
             return true;
         } else {
             return false;
