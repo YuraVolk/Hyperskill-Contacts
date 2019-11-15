@@ -7,6 +7,7 @@ public class Contact extends Entry {
 
     public void setPhone(String phone) {
         this.phone = phone;
+        isValidNumber(phone);
     }
 
     public void setSurname(String surname) {
@@ -21,11 +22,6 @@ public class Contact extends Entry {
         return surname;
     }
 
-    public Contact(String name, String surname, String phone) {
-        setName(name);
-        this.surname = surname;
-        this.phone = phone;
-    }
 
     @Override
     void print() {

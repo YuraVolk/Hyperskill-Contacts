@@ -15,7 +15,12 @@ public class AddContactCommand extends Command {
         System.out.println("Enter the number: ");
         String number = contacts.scanner.nextLine();
 
-        contacts.contacts.add(new Contact(name, surname, number));
+        Contact contact = new Contact();
+        contact.setName(name);
+        contact.setSurname(surname);
+        contact.setPhone(number);
+
+        contacts.contacts.add(contact);
         System.out.println("\nA record created!\n" +
                 "A Phone Book with a single record created!");
     }
