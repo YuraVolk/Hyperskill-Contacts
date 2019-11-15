@@ -3,12 +3,12 @@ package contacts;
 public class AddContactCommand extends Command {
     public AddContactCommand(Contacts contacts) {
         super(contacts);
-        execute();
     }
 
     @Override
     public void execute() {
         System.out.println("Enter the name of the person: ");
+        contacts.scanner.nextLine();
         String name = contacts.scanner.nextLine();
         System.out.println("Enter the surname of the person: ");
         String surname = contacts.scanner.nextLine();
@@ -21,7 +21,6 @@ public class AddContactCommand extends Command {
         contact.setPhone(number);
 
         contacts.contacts.add(contact);
-        System.out.println("\nA record created!\n" +
-                "A Phone Book with a single record created!");
+        System.out.println("The record added.");
     }
 }

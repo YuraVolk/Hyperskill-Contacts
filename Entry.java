@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 public abstract class Entry {
     private String name;
+    private String phone;
 
     void setName(String name) {
         this.name = name;
@@ -14,7 +15,23 @@ public abstract class Entry {
         return name;
     }
 
+    void setPhone(String phone) {
+        if (!isValidNumber(phone)) {
+            System.out.println("Wrong number format!");
+            this.phone = "";
+        } else {
+            this.phone = phone;
+        }
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
     abstract void print();
+
+
+    //Correct number check
 
     private int isCorrectParentheses(String group) {
         if (group.startsWith("(")) {
@@ -47,23 +64,19 @@ public abstract class Entry {
         }
 
         if (count > 1) {
-            System.out.println("Too much parentheses.");
             return false;
         }
 
 
         for (int i = 0; i < passed.length; i++) {
             if (i > 1 && passed[i] != 0) {
-                System.out.println("Parentheses where they can't be.");
                 return false;
             }
 
             //Group can be 09(09)09, which is wrong. One More check
             if (groups[i].contains("(") && !groups[i].startsWith("(")) {
-                System.out.println("Parentheses must be separated.");
                 return false;
             }
-
 
             if (groups[i].startsWith("(")) {
                 groups[i] = groups[i].substring(1, groups[i].length() - 1);
@@ -77,11 +90,10 @@ public abstract class Entry {
         Matcher matcher = pattern.matcher(finalPhone);
 
         if (matcher.find()) {
-            System.out.println(finalPhone.length());
             return true;
         } else {
-            System.out.println("Wrong format.");
             return false;
         }
     }
+
 }
