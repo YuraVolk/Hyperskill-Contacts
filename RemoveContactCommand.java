@@ -15,7 +15,7 @@ public class RemoveContactCommand extends Command {
         contacts.printContacts();
         System.out.println("Select a record: ");
         int record = contacts.scanner.nextInt();
-        contacts.contacts.remove(record);
+        contacts.contacts.remove(record - 1);
         System.out.println("Record removed!");
     }
 }
