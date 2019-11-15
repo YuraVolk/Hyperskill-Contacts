@@ -29,7 +29,8 @@ public abstract class Entry {
     }
 
     abstract void print();
-
+    abstract String[] getFields();
+    abstract void setField(String field, String value);
 
     //Correct number check
 

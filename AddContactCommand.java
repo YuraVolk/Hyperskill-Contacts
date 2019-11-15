@@ -16,9 +16,7 @@ public class AddContactCommand extends Command {
         String number = contacts.scanner.nextLine();
 
         Contact contact = new Contact();
-        contact.setName(name);
-        contact.setSurname(surname);
-        contact.setPhone(number);
+        c
 
         contacts.contacts.add(contact);
         System.out.println("The record added.");
