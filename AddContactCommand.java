@@ -7,18 +7,10 @@ public class AddContactCommand extends Command {
 
     @Override
     public void execute() {
-        System.out.println("Enter the name of the person: ");
-        contacts.scanner.nextLine();
-        String name = contacts.scanner.nextLine();
-        System.out.println("Enter the surname of the person: ");
-        String surname = contacts.scanner.nextLine();
-        System.out.println("Enter the number: ");
-        String number = contacts.scanner.nextLine();
+        Contact contact = new Contact(contacts);
+        contact.create();
+        contact.print();
 
-        Contact contact = new Contact();
-        c
-
-        contacts.contacts.add(contact);
-        System.out.println("The record added.");
+        System.out.println("The record added.\n");
     }
 }
