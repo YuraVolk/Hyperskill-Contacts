@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ContactValidator {
+class ContactValidator {
     private int isCorrectParentheses(String group) {
         if (group.matches("\\(\\)+")) {
             return Integer.MIN_VALUE;

@@ -31,8 +31,12 @@ abstract class Entry {
         return phone;
     }
 
+    void printCompact() {
+        System.out.println(name);
+    }
+
     abstract void print();
-    abstract String[] getFields();
+    abstract String getFields();
     abstract void setField(String field, String value);
     abstract void create();
 }

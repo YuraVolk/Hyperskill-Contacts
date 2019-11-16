@@ -34,14 +34,8 @@ class Contact extends Entry {
     }
 
     @Override
-    String[] getFields() {
-        return new String[]{
-                "name",
-                "surname",
-                "number",
-                "gender",
-                "birth date"
-        };
+    String getFields() {
+        return "name, surname, birth, gender, number";
     }
 
     @Override
@@ -57,7 +51,11 @@ class Contact extends Entry {
                 setPhone(value);
                 break;
             case "gender":
-                gender = value;
+                if (validator.validateGender(value)) {
+                    gender = value;
+                } else {
+                    System.out.println("Bad gender!");
+                }
                 break;
             case "birth date":
                 if (validator.validateBirthDate(value)) {
@@ -101,5 +99,10 @@ class Contact extends Entry {
         timeEdited = LocalDateTime.now();
 
         contacts.contacts.add(this);
+    }
+
+    @Override
+    void printCompact() {
+        System.out.printf("%s %s\n", getName(), surname);
     }
 }

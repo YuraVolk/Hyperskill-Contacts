@@ -1,6 +1,6 @@
 package contacts;
 
-public class EditContactCommand extends Command {
+class EditContactCommand extends Command {
     EditContactCommand(Contacts contacts) {
         super(contacts);
     }
@@ -13,9 +13,16 @@ public class EditContactCommand extends Command {
         }
 
         contacts.printContacts();
-        System.out.println("Select a record: ");
-        int record = contacts.scanner.nextInt();
+        System.out.print("Select a record: ");
+        int record = contacts.scanner.nextInt() - 1;
+        System.out.printf("Select a field (%s): ",
+                        contacts.contacts.get(record).getFields());
+        String field = contacts.scanner.next();
+        System.out.printf("Enter %s: ", field);
+        contacts.scanner.nextLine();
+        String value = contacts.scanner.nextLine();
+        contacts.contacts.get(record).setField(field, value);
 
-        System.out.println("The record updated!");
+        System.out.println("The record updated!\n");
     }
 }

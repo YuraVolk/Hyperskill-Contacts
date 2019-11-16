@@ -1,6 +1,6 @@
 package contacts;
 
-public class RemoveContactCommand extends Command {
+class RemoveContactCommand extends Command {
     RemoveContactCommand(Contacts contacts) {
         super(contacts);
     }

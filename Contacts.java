@@ -11,7 +11,7 @@ public class Contacts {
     void printContacts() {
         for (int i = 0; i < contacts.size(); i++) {
             System.out.printf("%s. ", i + 1);
-            contacts.get(i).print();
+            contacts.get(i).printCompact();
         }
     }
 
@@ -23,8 +23,6 @@ public class Contacts {
         while (true) {
             System.out.print("Enter action (add, remove, edit, count, list, exit): ");
             choice = scanner.next();
-
-
             switch (choice) {
                 case "add":
                     command = new AddContactCommand(this);
