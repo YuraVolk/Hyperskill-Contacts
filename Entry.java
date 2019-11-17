@@ -1,8 +1,9 @@
 package contacts;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-abstract class Entry {
+abstract class Entry implements Serializable {
     private String name;
     private String phone;
     private LocalDateTime timeCreated;

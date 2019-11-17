@@ -15,7 +15,9 @@ public class Contacts {
         }
     }
 
+
     void start() {
+
         Command command;
         String choice;
 
@@ -48,5 +50,6 @@ public class Contacts {
                     break contacts;
             }
         }
+
     }
 }

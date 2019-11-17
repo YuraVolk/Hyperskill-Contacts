@@ -1,6 +1,8 @@
 package contacts;
 
-public class Organization extends Entry {
+import java.io.Serializable;
+
+class Organization extends Entry implements Serializable {
     private String address;
 
     Organization(Contacts contacts) {

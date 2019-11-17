@@ -1,8 +1,9 @@
 package contacts;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-class Contact extends Entry {
+class Contact extends Entry implements Serializable {
     private String surname;
     private String gender = "";
     private LocalDate birthDate;
