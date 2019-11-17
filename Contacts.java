@@ -21,7 +21,7 @@ public class Contacts {
 
         contacts:
         while (true) {
-            System.out.print("Enter action (add, remove, edit, count, list, exit): ");
+            System.out.print("Enter action (add, remove, edit, count, info, exit): ");
             choice = scanner.next();
             switch (choice) {
                 case "add":
@@ -40,8 +40,9 @@ public class Contacts {
                     System.out.printf("The phone book has %s records.\n",
                             contacts.size());
                     break;
-                case "list":
-                    printContacts();
+                case "info":
+                    command = new ShowInfoCommand(this);
+                    command.execute();
                     break;
                 case "exit":
                     break contacts;

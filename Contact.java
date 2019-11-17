@@ -1,13 +1,10 @@
 package contacts;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 class Contact extends Entry {
     private String surname;
     private String gender = "";
-    private LocalDateTime timeCreated;
-    private LocalDateTime timeEdited;
     private LocalDate birthDate;
 
     Contact(Contacts contacts) {
@@ -30,7 +27,7 @@ class Contact extends Entry {
                 "Time created: %s\n" +
                 "Time last edit: %s\n",
                 getName(), surname, birth, genderData,
-                number, timeCreated, timeEdited);
+                number, getTimeCreated(), getTimeEdited());
     }
 
     @Override
@@ -65,7 +62,7 @@ class Contact extends Entry {
                 }
         }
 
-        timeEdited = LocalDateTime.now();
+        setTimeEdited();
     }
 
     @Override
@@ -95,8 +92,7 @@ class Contact extends Entry {
         System.out.print("Enter the number: ");
         setPhone(contacts.scanner.nextLine());
 
-        timeCreated = LocalDateTime.now();
-        timeEdited = LocalDateTime.now();
+        setTimeCreated();
 
         contacts.contacts.add(this);
     }

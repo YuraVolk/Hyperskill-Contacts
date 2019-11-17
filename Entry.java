@@ -1,8 +1,12 @@
 package contacts;
 
+import java.time.LocalDateTime;
+
 abstract class Entry {
     private String name;
     private String phone;
+    private LocalDateTime timeCreated;
+    private LocalDateTime timeEdited;
     ContactValidator validator = new ContactValidator();
     Contacts contacts;
 
@@ -29,6 +33,23 @@ abstract class Entry {
 
     String getPhone() {
         return phone;
+    }
+
+    void setTimeCreated() {
+        timeCreated = LocalDateTime.now();
+        timeEdited = LocalDateTime.now();
+    }
+
+    void setTimeEdited() {
+        timeEdited = LocalDateTime.now();
+    }
+
+    LocalDateTime getTimeCreated() {
+        return timeCreated;
+    }
+
+    LocalDateTime getTimeEdited() {
+        return timeEdited;
     }
 
     void printCompact() {
