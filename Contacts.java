@@ -1,12 +1,19 @@
 package contacts;
 
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Contacts {
+public class Contacts implements Serializable {
     List<Entry> contacts = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
+    private String filename = "file.ser";
 
     void printContacts() {
         for (int i = 0; i < contacts.size(); i++) {
@@ -15,9 +22,34 @@ public class Contacts {
         }
     }
 
+    private void serialize() {
+        try {
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
 
-    void start() {
+            out.writeObject(contacts);
 
+            out.close();
+            file.close();
+        } catch (IOException e) {
+            System.exit(-1);
+        }
+    }
+
+    private void deserialize() throws Exception{
+
+            FileInputStream file = new FileInputStream(filename);
+            ObjectInputStream out = new ObjectInputStream(file);
+
+            this.contacts = (List<Entry>) out.readObject();
+            System.out.println(this.contacts);
+            out.close();
+            file.close();
+
+    }
+
+    void start() throws Exception{
+       // deserialize();
         Command command;
         String choice;
 
@@ -51,5 +83,6 @@ public class Contacts {
             }
         }
 
+//        serialize();
     }
 }
