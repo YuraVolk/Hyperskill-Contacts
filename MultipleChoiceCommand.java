@@ -19,7 +19,7 @@ abstract class MultipleChoiceCommand extends Command {
         String value = contacts.scanner.nextLine();
         contacts.contacts.get(record).setField(field, value);
 
-        System.out.println("Saved.");
+        System.out.println("Saved.\n");
         contacts.contacts.get(record).print();
     }
 

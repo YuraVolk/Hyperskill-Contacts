@@ -38,6 +38,7 @@ public class Contacts implements Serializable {
         File f = new File("MyData.ser");
         if(f.exists() && !f.isDirectory()) {
             deserialize();
+            System.out.println("open phonebook.db");
         }
 
         Command command;
