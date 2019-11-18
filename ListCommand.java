@@ -26,23 +26,6 @@ class ListCommand extends MultipleChoiceCommand {
         }
 
         int record = Integer.parseInt(action) - 1;
-        contacts.contacts.get(record).print();
-        System.out.println();
-
-        String choice;
-        while (true) {
-            System.out.println("[record] Enter action (edit, delete, menu): ");
-            choice = contacts.scanner.next();
-            switch (choice) {
-                case "edit":
-                    editContact(record);
-                    break;
-                case "delete":
-                    removeContact(record);
-                    break;
-                case "menu":
-                    return;
-            }
-        }
+        startContactOperations(record);
     }
 }

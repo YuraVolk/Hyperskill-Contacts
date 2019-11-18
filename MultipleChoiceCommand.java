@@ -5,12 +5,12 @@ abstract class MultipleChoiceCommand extends Command {
         super(contacts);
     }
 
-    void removeContact(int record) {
+    private void removeContact(int record) {
         contacts.contacts.remove(record);
         System.out.println("The record removed!\n");
     }
 
-    void editContact(int record) {
+    private void editContact(int record) {
         System.out.printf("Select a field (%s): ",
                 contacts.contacts.get(record).getFields());
         String field = contacts.scanner.next();
@@ -25,6 +25,29 @@ abstract class MultipleChoiceCommand extends Command {
 
     boolean isNumber(String num) {
         return num.matches("-?\\d+(\\.\\d+)?");
+    }
+
+    void startContactOperations(int record) {
+        contacts.contacts.get(record).print();
+        System.out.println();
+
+        String choice;
+
+        loop:
+        while (true) {
+            System.out.println("[record] Enter action (edit, delete, menu): ");
+            choice = contacts.scanner.next();
+            switch (choice) {
+                case "edit":
+                    editContact(record);
+                    break loop;
+                case "delete":
+                    removeContact(record);
+                    break loop;
+                case "menu":
+                    break loop;
+            }
+        }
     }
 
     abstract void printList();

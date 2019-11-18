@@ -61,6 +61,7 @@ public class Contacts implements Serializable {
                     break;
                 case "search":
                     new SearchCommand(this).execute();
+                    break;
                 case "exit":
                     break contacts;
             }

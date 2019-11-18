@@ -56,5 +56,18 @@ public class SearchCommand extends MultipleChoiceCommand {
     @Override
     void execute() {
         printList();
+
+        System.out.println("[list] Enter action ([number], back, again): ");
+        String action;
+
+        action = contacts.scanner.next();
+        if (!isNumber(action)) {
+            if (action.equals("again")) {
+                execute();
+            }
+        } else {
+            int record = Integer.parseInt(action) - 1;
+            startContactOperations(record);
+        }
     }
 }
