@@ -1,5 +1,7 @@
 package contacts;
 
+import java.util.List;
+
 abstract class MultipleChoiceCommand extends Command {
     MultipleChoiceCommand(Contacts contacts) {
         super(contacts);
@@ -43,6 +45,29 @@ abstract class MultipleChoiceCommand extends Command {
                     break loop;
                 case "delete":
                     removeContact(record);
+                    break loop;
+                case "menu":
+                    break loop;
+            }
+        }
+    }
+
+    void startPostSearchOperations(int record,  List<Integer> occurrenceIndexes) {
+        contacts.contacts.get(record).print();
+        System.out.println();
+
+        String choice;
+
+        loop:
+        while (true) {
+            System.out.println("[record] Enter action (edit, delete, menu): ");
+            choice = contacts.scanner.next();
+            switch (choice) {
+                case "edit":
+                    editContact(occurrenceIndexes.get(record));
+                    break loop;
+                case "delete":
+                    removeContact(occurrenceIndexes.get(record));
                     break loop;
                 case "menu":
                     break loop;

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchCommand extends MultipleChoiceCommand {
+    private List<Integer> realIndexes = new ArrayList<>();
+
     SearchCommand(Contacts contacts) {
         super(contacts);
     }
@@ -42,6 +44,7 @@ public class SearchCommand extends MultipleChoiceCommand {
             if (containsIgnoreCase(contacts.contacts.get(i).
                             returnFieldsString(), query))  {
                 contactsFound.add(contacts.contacts.get(i));
+                realIndexes.add(i);
             }
         }
 
@@ -67,7 +70,7 @@ public class SearchCommand extends MultipleChoiceCommand {
             }
         } else {
             int record = Integer.parseInt(action) - 1;
-            startContactOperations(record);
+            startPostSearchOperations(record, realIndexes);
         }
     }
 }
