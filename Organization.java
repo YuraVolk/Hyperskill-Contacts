@@ -58,4 +58,9 @@ class Organization extends Entry implements Serializable {
 
         contacts.contacts.add(this);
     }
+
+    @Override
+    String returnFieldsString() {
+        return getName() + getPhone() + address;
+    }
 }

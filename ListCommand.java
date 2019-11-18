@@ -1,6 +1,6 @@
 package contacts;
 
-public class ListCommand extends MultipleChoiceCommand {
+class ListCommand extends MultipleChoiceCommand {
     ListCommand(Contacts contacts) {
         super(contacts);
     }
@@ -18,7 +18,14 @@ public class ListCommand extends MultipleChoiceCommand {
     void execute() {
         printList();
         System.out.println("[list] Enter action ([number], back): ");
-        int record = contacts.scanner.nextInt() - 1;
+        String action;
+
+        action = contacts.scanner.next();
+        if (!isNumber(action)) {
+            return;
+        }
+
+        int record = Integer.parseInt(action) - 1;
         contacts.contacts.get(record).print();
         System.out.println();
 

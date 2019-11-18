@@ -61,4 +61,5 @@ abstract class Entry implements Serializable {
     abstract String getFields();
     abstract void setField(String field, String value);
     abstract void create();
+    abstract String returnFieldsString();
 }

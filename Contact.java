@@ -99,6 +99,11 @@ class Contact extends Entry implements Serializable {
     }
 
     @Override
+    String returnFieldsString() {
+        return getName() + getPhone() + surname;
+    }
+
+    @Override
     void printCompact() {
         System.out.printf("%s %s\n", getName(), surname);
     }

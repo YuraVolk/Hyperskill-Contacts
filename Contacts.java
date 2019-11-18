@@ -8,28 +8,33 @@ import java.util.Scanner;
 public class Contacts implements Serializable {
     List<Entry> contacts = new ArrayList<>();
     Scanner scanner = new Scanner(System.in);
-    private String filename = "file.ser";
 
     private void serialize() {
         try {
             List<Entry> list = contacts;
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("MyData.ser"));
+            ObjectOutputStream out = new ObjectOutputStream(
+                    new FileOutputStream("MyData.ser"));
             out.writeObject(list);
             out.close();
         } catch (IOException e) {
-            System.out.println(e);
             System.exit(-1);
         }
     }
 
-    private void deserialize() throws Exception{
-        FileInputStream fileIn = new FileInputStream("MyData.ser");
-        ObjectInputStream in = new ObjectInputStream(fileIn);
-
-        contacts = (List<Entry>) in.readObject();
+    @SuppressWarnings("unchecked")
+    private void deserialize() {
+        try {
+            FileInputStream fileIn = new FileInputStream("MyData.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            contacts = (List<Entry>) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Contacts file is not found");
+        } catch (ClassCastException e) {
+            System.out.println("Contacts file is corrupted.");
+        }
     }
 
-    void start() throws Exception {
+    void start() {
         File f = new File("MyData.ser");
         if(f.exists() && !f.isDirectory()) {
             deserialize();
@@ -40,28 +45,22 @@ public class Contacts implements Serializable {
 
         contacts:
         while (true) {
-            System.out.print("Enter action (add, remove, edit, count, info, exit): ");
+            System.out.print("[menu] Enter action (add, list, search, count, exit): ");
             choice = scanner.next();
             switch (choice) {
                 case "add":
                     command = new AddContactCommand(this);
                     command.execute();
                     break;
-                case "remove":
-
-                    break;
-                case "edit":
-                    command = new EditContactCommand(this);
-                    command.execute();
+                case "list":
+                    new ListCommand(this).execute();
                     break;
                 case "count":
                     System.out.printf("The phone book has %s records.\n",
                             contacts.size());
                     break;
-                case "info":
-                    command = new ShowInfoCommand(this);
-                    command.execute();
-                    break;
+                case "search":
+                    new SearchCommand(this).execute();
                 case "exit":
                     break contacts;
             }

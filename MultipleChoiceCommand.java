@@ -1,6 +1,6 @@
 package contacts;
 
-public abstract class MultipleChoiceCommand extends Command {
+abstract class MultipleChoiceCommand extends Command {
     MultipleChoiceCommand(Contacts contacts) {
         super(contacts);
     }
@@ -19,7 +19,12 @@ public abstract class MultipleChoiceCommand extends Command {
         String value = contacts.scanner.nextLine();
         contacts.contacts.get(record).setField(field, value);
 
-        System.out.println("The record updated!\n");
+        System.out.println("Saved.");
+        contacts.contacts.get(record).print();
+    }
+
+    boolean isNumber(String num) {
+        return num.matches("-?\\d+(\\.\\d+)?");
     }
 
     abstract void printList();
