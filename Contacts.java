@@ -10,13 +10,6 @@ public class Contacts implements Serializable {
     Scanner scanner = new Scanner(System.in);
     private String filename = "file.ser";
 
-    void printContacts() {
-        for (int i = 0; i < contacts.size(); i++) {
-            System.out.printf("%s. ", i + 1);
-            contacts.get(i).printCompact();
-        }
-    }
-
     private void serialize() {
         try {
             List<Entry> list = contacts;
@@ -55,8 +48,7 @@ public class Contacts implements Serializable {
                     command.execute();
                     break;
                 case "remove":
-                    command = new RemoveContactCommand(this);
-                    command.execute();
+
                     break;
                 case "edit":
                     command = new EditContactCommand(this);

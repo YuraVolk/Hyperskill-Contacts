@@ -12,7 +12,6 @@ class EditContactCommand extends Command {
             return;
         }
 
-        contacts.printContacts();
         System.out.print("Select a record: ");
         int record = contacts.scanner.nextInt() - 1;
         System.out.printf("Select a field (%s): ",

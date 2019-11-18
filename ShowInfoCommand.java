@@ -7,7 +7,7 @@ public class ShowInfoCommand extends Command{
 
     @Override
     void execute() {
-        contacts.printContacts();
+
         System.out.print("Select a record: ");
         int record = contacts.scanner.nextInt() - 1;
         contacts.contacts.get(record).print();
