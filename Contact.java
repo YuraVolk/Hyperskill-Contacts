@@ -1,6 +1,5 @@
 package contacts;
 
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 
@@ -9,16 +8,12 @@ class Contact extends Entry implements Serializable {
     private String gender = "";
     private LocalDate birthDate;
 
-    private String serializedName;
-    private String serializedPhone;
-
     Contact(Contacts contacts) {
         super(contacts);
     }
 
     @Override
     void print() {
-        System.out.println(serializedName);
         String number = getPhone().length() == 0 ? "[no number]" : getPhone();
         String genderData = gender.length() == 0 ? "[no data]" : gender;
         String birth = birthDate == null ?
@@ -46,14 +41,12 @@ class Contact extends Entry implements Serializable {
         switch (field) {
             case "name":
                 setName(value);
-                this.serializedName = getName();
                 break;
             case "surname":
                 surname = value;
                 break;
             case "number":
                 setPhone(value);
-                this.serializedPhone = getPhone();
                 break;
             case "gender":
                 if (validator.validateGender(value)) {
@@ -101,13 +94,9 @@ class Contact extends Entry implements Serializable {
         setPhone(contacts.scanner.nextLine());
 
         setTimeCreated();
-        this.serializedPhone = getPhone();
-        this.serializedName = getName();
 
         contacts.contacts.add(this);
     }
-
-
 
     @Override
     void printCompact() {

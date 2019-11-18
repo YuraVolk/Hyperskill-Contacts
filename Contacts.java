@@ -1,11 +1,6 @@
 package contacts;
 
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -24,32 +19,29 @@ public class Contacts implements Serializable {
 
     private void serialize() {
         try {
-            FileOutputStream file = new FileOutputStream(filename);
-            ObjectOutputStream out = new ObjectOutputStream(file);
-
-            out.writeObject(contacts);
-
+            List<Entry> list = contacts;
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("MyData.ser"));
+            out.writeObject(list);
             out.close();
-            file.close();
         } catch (IOException e) {
+            System.out.println(e);
             System.exit(-1);
         }
     }
 
     private void deserialize() throws Exception{
+        FileInputStream fileIn = new FileInputStream("MyData.ser");
+        ObjectInputStream in = new ObjectInputStream(fileIn);
 
-            FileInputStream file = new FileInputStream(filename);
-            ObjectInputStream out = new ObjectInputStream(file);
-
-            this.contacts = (List<Entry>) out.readObject();
-            System.out.println(this.contacts);
-            out.close();
-            file.close();
-
+        contacts = (List<Entry>) in.readObject();
     }
 
-    void start() throws Exception{
-       // deserialize();
+    void start() throws Exception {
+        File f = new File("MyData.ser");
+        if(f.exists() && !f.isDirectory()) {
+            deserialize();
+        }
+
         Command command;
         String choice;
 
@@ -83,6 +75,6 @@ public class Contacts implements Serializable {
             }
         }
 
-//        serialize();
+        serialize();
     }
 }

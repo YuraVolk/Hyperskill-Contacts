@@ -8,8 +8,8 @@ abstract class Entry implements Serializable {
     private String phone;
     private LocalDateTime timeCreated;
     private LocalDateTime timeEdited;
-    ContactValidator validator = new ContactValidator();
-    Contacts contacts;
+    static ContactValidator validator = new ContactValidator();
+    static Contacts contacts;
 
     Entry(Contacts contacts) {
         this.contacts = contacts;
